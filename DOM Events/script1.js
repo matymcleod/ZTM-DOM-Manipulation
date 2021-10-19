@@ -4,16 +4,28 @@ const button = document.getElementById("enter");
 const input = document.getElementById("userinput");
 // selects the first ul dom element
 const ul = document.querySelector("ul");
+// selector for class "liNew"
+const liNew = document.getElementsByClassName("liNew");
+
 
 function inputLength() {
   return input.value.length;
 }
 
 function createListItem() {
-    // create li
+    // create li element on DOM
     const li = document.createElement("li");
+    li.className = "liNew"
+    // create checkbox with li on DOM
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = false;
+    cb.className = "checked";
+  
+    // attach checkbox to every new list item
+    li.appendChild(cb);
+    
     // attach a text node to the li and give it whatever is entered into the userinput field
-    const cb = document.createElement("input")
     li.appendChild(document.createTextNode(input.value));
     // attach the new li to the end of the ul
     ul.appendChild(li);
@@ -35,10 +47,15 @@ function addListAfterKeypress(event) {
   }
 }
 
+function toggleDone(event) {
+  onclick = this.classList.toggle(className"")
+}
+
 button.addEventListener("click", addListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);
 
+liNew.addEventListener("click", toggleDone);
 // if a list item is clicked on it toggles the .done class
 
 // add buttons next to each list item to delete the item when clicked
