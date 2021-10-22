@@ -48,7 +48,7 @@ function addListAfterKeypress(event) {
 }
 
 function toggleDone(event) {
-  onclick = this.classList.toggle(className"")
+  onclick = this.classList.toggle(className, " ")
 }
 
 button.addEventListener("click", addListAfterClick);
