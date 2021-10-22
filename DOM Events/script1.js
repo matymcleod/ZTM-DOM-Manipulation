@@ -4,9 +4,14 @@ const button = document.getElementById("enter");
 const input = document.getElementById("userinput");
 // selects the first ul dom element
 const ul = document.querySelector("ul");
-// selector for class "liNew"
-const liNew = document.getElementsByClassName("liNew");
+// selector for li elements
+const li = document.getElementsByTagName('li');
 
+button.addEventListener("click", addListAfterClick);
+input.addEventListener("keypress", addListAfterKeypress);
+
+liEvent();
+buttonListElement();
 
 function inputLength() {
   return input.value.length;
@@ -15,20 +20,24 @@ function inputLength() {
 function createListItem() {
     // create li element on DOM
     const li = document.createElement("li");
-    li.className = "liNew"
+    
+    const button = document.createElement('button');
+
     // create checkbox with li on DOM
-    const cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.checked = false;
-    cb.className = "checked";
+    // const cb = document.createElement("input");
+    // cb.type = "checkbox";
+    // cb.checked = false;
+    // cb.className = "checked";
   
     // attach checkbox to every new list item
-    li.appendChild(cb);
+    li.appendChild(button);
     
     // attach a text node to the li and give it whatever is entered into the userinput field
     li.appendChild(document.createTextNode(input.value));
     // attach the new li to the end of the ul
     ul.appendChild(li);
+
+    button.innerHTML = "delete";
     // sets userinput value to an empty string
     input.value = ("");
 }
@@ -47,17 +56,27 @@ function addListAfterKeypress(event) {
   }
 }
 
-function toggleDone(event) {
-  onclick = this.classList.toggle(className, " ")
+
+function liEvent() {
+  for(let i=0; i<li.length; i++) {
+    li[i].addEventListener('click', changeClass)
+  }
 }
 
-button.addEventListener("click", addListAfterClick);
+function changeClass() {
+  this.classList.toggle('done');
+}
 
-input.addEventListener("keypress", addListAfterKeypress);
+function buttonListElement() {
+  const button = document.querySelectorAll('li button');
+  for(let i=0; i<button.length; i++) {
+    button[i].addEventListener('click', clearElement)
+  }
+}
 
-liNew.addEventListener("click", toggleDone);
-// if a list item is clicked on it toggles the .done class
 
-// add buttons next to each list item to delete the item when clicked
-
-// when adding a new list item, automatically add a delete button
+function clearElement() {
+  for(let i=0; i<li.length; i++) {
+    this.parentNode.remove()
+  }
+}
