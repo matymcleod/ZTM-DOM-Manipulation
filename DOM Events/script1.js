@@ -7,8 +7,8 @@ const ul = document.querySelector("ul");
 // selector for li elements
 const li = document.getElementsByTagName('li');
 
-button.addEventListener("click", addListAfterClick);
-input.addEventListener("keypress", addListAfterKeypress);
+button.addEventListener("click", Onclick);
+input.addEventListener("keypress", addElement);
 
 liEvent();
 buttonListElement();
@@ -18,38 +18,25 @@ function inputLength() {
 }
 
 function createListItem() {
-    // create li element on DOM
     const li = document.createElement("li");
-    
     const button = document.createElement('button');
-
-    // create checkbox with li on DOM
-    // const cb = document.createElement("input");
-    // cb.type = "checkbox";
-    // cb.checked = false;
-    // cb.className = "checked";
-  
-    // attach checkbox to every new list item
-    li.appendChild(button);
-    
-    // attach a text node to the li and give it whatever is entered into the userinput field
     li.appendChild(document.createTextNode(input.value));
-    // attach the new li to the end of the ul
     ul.appendChild(li);
-
+    li.appendChild(button);
     button.innerHTML = "delete";
-    // sets userinput value to an empty string
     input.value = ("");
+
+    liEvent();
+    buttonListElement();
 }
   
-function addListAfterClick() {
-    // if userinput is not empty, do this
+function Onclick() {
   if(inputLength() > 0) {
     createListItem();
   }
 }
 
-function addListAfterKeypress(event) {
+function addElement() {
   // if userinput is not empty, do this
   if(inputLength() > 0 && event.keyCode === 13) {
     createListItem();
